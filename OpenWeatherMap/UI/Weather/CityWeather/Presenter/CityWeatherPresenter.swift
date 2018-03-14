@@ -44,18 +44,23 @@ class CityWeatherPresenter : CityWeatherViewPresenter {
         }
         
         self.view?.showProgressHUD()
-        APIWeather.shared.cityWeather(cityId: (cityId ?? 0)) { (success, result) in
+        APIWeather.shared.cityWeather(cityId: (cityId ?? 0)) { [weak self] (success, result) in
+            
+            guard let realSelf = self else {
+                return
+            }
+            
             if success && !(result is Bool) {
-                self.cityWeather = result as? CityWeather
-                self.prepareMainInfoValues()
-                self.view?.updateNavigationBar(cityName: self.cityWeather?.name ?? "", date: self.cityWeather?.date)
-                self.view?.updateView()
+                realSelf.cityWeather = result as? CityWeather
+                realSelf.prepareMainInfoValues()
+                realSelf.view?.updateNavigationBar(cityName: realSelf.cityWeather?.name ?? "", date: realSelf.cityWeather?.date)
+                realSelf.view?.updateView()
             } else {
                 if let error = result as? String {
-                    self.view?.showError(text: error)
+                    realSelf.view?.showError(text: error)
                 }
             }
-            self.view?.hideProgressHUD()
+            realSelf.view?.hideProgressHUD()
         }
     }
     

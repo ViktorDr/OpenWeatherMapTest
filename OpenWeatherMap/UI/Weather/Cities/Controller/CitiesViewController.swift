@@ -33,12 +33,15 @@ class CitiesViewController: BaseViewController {
     
     func loadCities() {
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        APIWeather.shared.cities { (result) in
-            if let commonCities = result as? [City] {
-                self.cities = commonCities
+        APIWeather.shared.cities { [weak self] (result) in
+            guard let realSelf = self else {
+                return
             }
-            MBProgressHUD.hide(for: self.view, animated: true)
-            self.citiesTableView.reloadData()
+            if let commonCities = result as? [City] {
+                realSelf.cities = commonCities
+            }
+            MBProgressHUD.hide(for: realSelf.view, animated: true)
+            realSelf.citiesTableView.reloadData()
         }
     }
     
