@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+enum CityWeatherSection : Int {
+    case weather = 0, mainInformation = 1
+}
+
 protocol CityWeatherViewPresenter : class {
     init(withView view: CityWeatherViewProtocol)
     func downloadWeatherInformation(cityId : Int?)
@@ -33,32 +37,26 @@ class CityWeatherPresenter : CityWeatherViewPresenter {
     
     required init(withView view: CityWeatherViewProtocol)  {
         self.view = view
-        weatherMainInfoValues  = Array.init(repeating: unknownInfo, count: weatherMainInfoTitles.count)
+        weatherMainInfoValues  = Array(repeating: unknownInfo, count: weatherMainInfoTitles.count)
     }
     
     func downloadWeatherInformation(cityId : Int?) {
-        
         guard cityId != nil else {
             self.view?.showError(text: noCityError)
             return
         }
-        
         self.view?.showProgressHUD()
         APIWeather.shared.cityWeather(cityId: (cityId ?? 0)) { [weak self] (success, result) in
-            
             guard let realSelf = self else {
                 return
             }
-            
             if success && !(result is Bool) {
                 realSelf.cityWeather = result as? CityWeather
                 realSelf.prepareMainInfoValues()
                 realSelf.view?.updateNavigationBar(cityName: realSelf.cityWeather?.name ?? "", date: realSelf.cityWeather?.date)
                 realSelf.view?.updateView()
-            } else {
-                if let error = result as? String {
+            } else if let error = result as? String {
                     realSelf.view?.showError(text: error)
-                }
             }
             realSelf.view?.hideProgressHUD()
         }
@@ -78,8 +76,8 @@ class CityWeatherPresenter : CityWeatherViewPresenter {
     }
     
     func value<T> (of value: T?) -> String {
-        if value != nil {
-            return "\(value!)"
+        if let realValue = value {
+            return "\(realValue)"
         } else {
             return unknownInfo
         }
@@ -90,9 +88,9 @@ class CityWeatherPresenter : CityWeatherViewPresenter {
             return 0
         }
         switch section {
-        case 0:
+        case CityWeatherSection.weather.rawValue:
             return 1
-        case 1:
+        case CityWeatherSection.mainInformation.rawValue:
             return weatherMainInfoTitles.count
         default:
             return 0
@@ -101,9 +99,9 @@ class CityWeatherPresenter : CityWeatherViewPresenter {
     
     func rowHeight(section : Int, row : Int) -> CGFloat? {
         switch section {
-        case 0:
+        case CityWeatherSection.weather.rawValue:
             return 60
-        case 1:
+        case CityWeatherSection.mainInformation.rawValue:
             return 40
         default:
             return 0

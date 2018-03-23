@@ -30,7 +30,7 @@
         <!--Cities View Controller-->
         <scene sceneID="vkb-fh-GFT">
             <objects>
-                <viewController id="uF1-il-P3o" customClass="CitiesViewController" customModule="OpenWeatherMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="uF1-il-P3o" customClass="CitiesViewController" customModule="OpenWeatherMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8T2-cz-GDR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +123,7 @@
         <!--City Weather View Controller-->
         <scene sceneID="2By-4p-FtK">
             <objects>
-                <viewController id="MMC-1a-cDW" customClass="CityWeatherViewController" customModule="OpenWeatherMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="MMC-1a-cDW" customClass="CityWeatherViewController" customModule="OpenWeatherMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Il0-hk-uQO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

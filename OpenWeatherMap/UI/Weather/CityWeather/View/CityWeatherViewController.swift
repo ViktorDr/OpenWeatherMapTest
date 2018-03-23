@@ -43,22 +43,13 @@ class CityWeatherViewController: BaseViewController {
         self.navigationItem.title = (name ?? "") + " (\(date?.text ?? ""))"
 
     }
-    
-    func setMapVisibleArea(lat : Double, lng : Double, visibility : Int) {
-        let center = CLLocationCoordinate2DMake(lat, lng)
-        let distance =  Double(visibility)
-        let mapRegion = MKCoordinateRegionMakeWithDistance(center, distance, distance)
-        self.map.setRegion(mapRegion, animated: false)
-        self.map.setCenter(center, animated: false)
-    }
-    
 }
 
 extension CityWeatherViewController : CityWeatherViewProtocol {
     
     func updateView() {
         let mapParameters = presenter.mapParameters()
-        setMapVisibleArea(lat: mapParameters.lat, lng: mapParameters.lng, visibility: mapParameters.visibility)
+        map.setMapVisibleArea(lat: mapParameters.lat, lng: mapParameters.lng, visibility: mapParameters.visibility)
         cityWeatherTableView.reloadData()
     }
     
@@ -89,15 +80,14 @@ extension CityWeatherViewController : UITableViewDataSource {
         return presenter.rowHeight(section: indexPath.section, row: indexPath.row) ?? UITableViewAutomaticDimension
     }
 
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case CityWeatherSection.weather.rawValue:
             let cell : WeatherTableViewCell = tableView.dequeueReusableCell(withIdentifier: WeatherTableViewCell.cellIdentifier()) as! WeatherTableViewCell
             let info = presenter.weatherMainInformation()
             cell.setInfo(main: info.main, description: info.description, imageAddress: info.imageAddress)
             return cell;
-        case 1:
+        case CityWeatherSection.mainInformation.rawValue:
             let cell : MainInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: MainInfoTableViewCell.cellIdentifier()) as! MainInfoTableViewCell
             let info = presenter.mainInfo(by: indexPath.row)
             cell.setInfo(title: info.title, value: info.value)

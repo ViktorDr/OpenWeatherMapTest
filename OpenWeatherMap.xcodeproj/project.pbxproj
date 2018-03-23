@@ -38,6 +38,7 @@
 		F5965FCB205831B200C0AB7C /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = F5965FCA205831B200C0AB7C /* city.list.json */; };
 		F5965FCD2058326900C0AB7C /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5965FCC2058326900C0AB7C /* City.swift */; };
 		F5965FD0205832BC00C0AB7C /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5965FCF205832BC00C0AB7C /* Coordinate.swift */; };
+		F5D610B02064F62400AA4534 /* MKMapView+Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D610AF2064F62400AA4534 /* MKMapView+Area.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		F5965FCA205831B200C0AB7C /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 		F5965FCC2058326900C0AB7C /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		F5965FCF205832BC00C0AB7C /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		F5D610AF2064F62400AA4534 /* MKMapView+Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Area.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 		F57264D020585D1900976528 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F5D610AE2064F61100AA4534 /* Map */,
 				F57264F02059155E00976528 /* Date */,
 				F57264ED2058EC7F00976528 /* ViewController */,
 				F57264DE20586D1500976528 /* UIColor */,
@@ -363,6 +366,14 @@
 			path = City;
 			sourceTree = "<group>";
 		};
+		F5D610AE2064F61100AA4534 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				F5D610AF2064F62400AA4534 /* MKMapView+Area.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -521,6 +532,7 @@
 				F5965FBF20582C5500C0AB7C /* ResponseMapper.swift in Sources */,
 				F57264CF205857B700976528 /* APIWeather.swift in Sources */,
 				F57264E620586F8200976528 /* CityWeatherPresenter.swift in Sources */,
+				F5D610B02064F62400AA4534 /* MKMapView+Area.swift in Sources */,
 				F5965FCD2058326900C0AB7C /* City.swift in Sources */,
 				F57264E020586D2C00976528 /* UIColor+ProjectColors.swift in Sources */,
 				F57264DA205864B500976528 /* CityTableViewCell.swift in Sources */,
