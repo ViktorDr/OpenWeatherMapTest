@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5E25CC2CE8F121F58A6985EE /* Pods_OpenWeatherMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6F466D5C8A14E1D159970D /* Pods_OpenWeatherMap.framework */; };
+		841194DC22B6B8BE00A0F791 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194DB22B6B8BE00A0F791 /* Call.swift */; };
+		841194DE22B6B9DA00A0F791 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841194DD22B6B9DA00A0F791 /* APIClient.swift */; };
 		F57264C420583EE700976528 /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57264C320583EE700976528 /* NetworkConfiguration.swift */; };
 		F57264C62058446E00976528 /* NetworkCoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57264C52058446E00976528 /* NetworkCoreEngine.swift */; };
 		F57264C920584ABE00976528 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57264C820584ABE00976528 /* Weather.swift */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		15246DA3EB28467AB7FC60B6 /* Pods-OpenWeatherMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherMap/Pods-OpenWeatherMap.debug.xcconfig"; sourceTree = "<group>"; };
+		841194DB22B6B8BE00A0F791 /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
+		841194DD22B6B9DA00A0F791 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		933E74585068EE15C1F82FEC /* Pods-OpenWeatherMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherMap/Pods-OpenWeatherMap.release.xcconfig"; sourceTree = "<group>"; };
 		9F6F466D5C8A14E1D159970D /* Pods_OpenWeatherMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeatherMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F57264C320583EE700976528 /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -100,6 +104,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		841194DA22B6B8A000A0F791 /* APILayer */ = {
+			isa = PBXGroup;
+			children = (
+				841194DB22B6B8BE00A0F791 /* Call.swift */,
+				841194DD22B6B9DA00A0F791 /* APIClient.swift */,
+			);
+			path = APILayer;
+			sourceTree = "<group>";
+		};
 		9CE6A5A3B2245A2C3E99E12B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,38 +151,30 @@
 		F57264D020585D1900976528 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F5D610AE2064F61100AA4534 /* Map */,
-				F57264F02059155E00976528 /* Date */,
-				F57264ED2058EC7F00976528 /* ViewController */,
-				F57264DE20586D1500976528 /* UIColor */,
-				F57264D120585D1900976528 /* Storyboard */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		F57264D120585D1900976528 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
+				F5D610AF2064F62400AA4534 /* MKMapView+Area.swift */,
+				F57264F12059156E00976528 /* Date+Utility.swift */,
+				F57264EE2058EC9500976528 /* UIViewController+AlertView.swift */,
+				F57264DF20586D2C00976528 /* UIColor+ProjectColors.swift */,
 				F57264D220585D1900976528 /* UIStoryboard+Names.swift */,
 			);
-			path = Storyboard;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F57264D4205863D100976528 /* Cities */ = {
 			isa = PBXGroup;
 			children = (
-				F57264E220586F4E00976528 /* Controller */,
-				F57264D52058644B00976528 /* View */,
+				F5965FA1205805F800C0AB7C /* CitiesViewController.swift */,
+				F57264D52058644B00976528 /* Views */,
 			);
 			path = Cities;
 			sourceTree = "<group>";
 		};
-		F57264D52058644B00976528 /* View */ = {
+		F57264D52058644B00976528 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F57264D9205864B500976528 /* CityTableViewCell.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F57264D62058645A00976528 /* Weather */ = {
@@ -184,68 +189,20 @@
 		F57264DB205868A800976528 /* CityWeather */ = {
 			isa = PBXGroup;
 			children = (
-				F57264E420586F6D00976528 /* Presenter */,
-				F57264E120586F4300976528 /* View */,
+				F57264E320586F5F00976528 /* Views */,
+				F57264E520586F8200976528 /* CityWeatherPresenter.swift */,
+				F57264DC205868CA00976528 /* CityWeatherViewController.swift */,
 			);
 			path = CityWeather;
 			sourceTree = "<group>";
 		};
-		F57264DE20586D1500976528 /* UIColor */ = {
-			isa = PBXGroup;
-			children = (
-				F57264DF20586D2C00976528 /* UIColor+ProjectColors.swift */,
-			);
-			path = UIColor;
-			sourceTree = "<group>";
-		};
-		F57264E120586F4300976528 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				F57264E320586F5F00976528 /* Cells */,
-				F57264DC205868CA00976528 /* CityWeatherViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		F57264E220586F4E00976528 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				F5965FA1205805F800C0AB7C /* CitiesViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		F57264E320586F5F00976528 /* Cells */ = {
+		F57264E320586F5F00976528 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F57264E92058726600976528 /* WeatherTableViewCell.swift */,
 				F57264EB2058727700976528 /* MainInfoTableViewCell.swift */,
 			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		F57264E420586F6D00976528 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				F57264E520586F8200976528 /* CityWeatherPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		F57264ED2058EC7F00976528 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				F57264EE2058EC9500976528 /* UIViewController+AlertView.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		F57264F02059155E00976528 /* Date */ = {
-			isa = PBXGroup;
-			children = (
-				F57264F12059156E00976528 /* Date+Utility.swift */,
-			);
-			path = Date;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F5965F93205805F700C0AB7C = {
@@ -269,12 +226,12 @@
 		F5965F9E205805F800C0AB7C /* OpenWeatherMap */ = {
 			isa = PBXGroup;
 			children = (
-				F5965FB520582B5300C0AB7C /* UI */,
+				F5965FB520582B5300C0AB7C /* Scenes */,
+				F57264D020585D1900976528 /* Extensions */,
 				F5965FB420582B3900C0AB7C /* Utility */,
 				F5965FB320582B2700C0AB7C /* Models */,
 				F5965FB220582AD000C0AB7C /* Resources */,
 				F5965FB12058066700C0AB7C /* Application */,
-				F5965FA3205805F800C0AB7C /* Main.storyboard */,
 			);
 			path = OpenWeatherMap;
 			sourceTree = "<group>";
@@ -282,6 +239,7 @@
 		F5965FB12058066700C0AB7C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				F5965FA3205805F800C0AB7C /* Main.storyboard */,
 				F5965FAB205805F800C0AB7C /* Info.plist */,
 				F5965FA8205805F800C0AB7C /* LaunchScreen.storyboard */,
 				F5965F9F205805F800C0AB7C /* AppDelegate.swift */,
@@ -310,7 +268,7 @@
 		F5965FB420582B3900C0AB7C /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				F57264D020585D1900976528 /* Extensions */,
+				841194DA22B6B8A000A0F791 /* APILayer */,
 				F57264CA205853CB00976528 /* APIWeather */,
 				F5965FC720582CE800C0AB7C /* Router */,
 				F5965FC020582C5D00C0AB7C /* BaseClasses */,
@@ -318,12 +276,12 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		F5965FB520582B5300C0AB7C /* UI */ = {
+		F5965FB520582B5300C0AB7C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				F57264D62058645A00976528 /* Weather */,
 			);
-			path = UI;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		F5965FB620582B6F00C0AB7C /* Network */ = {
@@ -366,14 +324,6 @@
 			path = City;
 			sourceTree = "<group>";
 		};
-		F5D610AE2064F61100AA4534 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				F5D610AF2064F62400AA4534 /* MKMapView+Area.swift */,
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -386,7 +336,6 @@
 				F5965F99205805F800C0AB7C /* Frameworks */,
 				F5965F9A205805F800C0AB7C /* Resources */,
 				6E4AF20E9CC151B58F14B9EF /* [CP] Embed Pods Frameworks */,
-				FA4ECFD03AA5F96D7C79F519 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -404,11 +353,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Viktor Drykin";
 				TargetAttributes = {
 					F5965F9B205805F800C0AB7C = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -488,24 +438,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FA4ECFD03AA5F96D7C79F519 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-OpenWeatherMap/Pods-OpenWeatherMap-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenWeatherMap/Pods-OpenWeatherMap-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -518,6 +450,8 @@
 				F57264CD205854D500976528 /* FileManager.swift in Sources */,
 				F57264C420583EE700976528 /* NetworkConfiguration.swift in Sources */,
 				F5965FC420582CB200C0AB7C /* BaseNavigationController.swift in Sources */,
+				841194DE22B6B9DA00A0F791 /* APIClient.swift in Sources */,
+				841194DC22B6B8BE00A0F791 /* Call.swift in Sources */,
 				F57264EF2058EC9500976528 /* UIViewController+AlertView.swift in Sources */,
 				F5965FA2205805F800C0AB7C /* CitiesViewController.swift in Sources */,
 				F57264C62058446E00976528 /* NetworkCoreEngine.swift in Sources */,
@@ -579,6 +513,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -586,6 +521,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -636,6 +572,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -643,6 +580,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -684,7 +622,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ViktorDrykin.OpenWeatherMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -701,7 +639,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ViktorDrykin.OpenWeatherMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

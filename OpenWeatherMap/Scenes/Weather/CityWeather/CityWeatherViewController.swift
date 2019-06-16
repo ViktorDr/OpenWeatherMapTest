@@ -77,7 +77,7 @@ extension CityWeatherViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return presenter.rowHeight(section: indexPath.section, row: indexPath.row) ?? UITableViewAutomaticDimension
+        return presenter.rowHeight(section: indexPath.section, row: indexPath.row) ?? UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
