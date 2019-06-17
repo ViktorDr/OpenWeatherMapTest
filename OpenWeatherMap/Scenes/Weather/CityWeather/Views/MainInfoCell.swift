@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainInfoTableViewCell: BaseTableViewCell {
+class MainInfoCell: BaseTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,8 +22,8 @@ class MainInfoTableViewCell: BaseTableViewCell {
     }
     
     func setInfo(title : String, value : String) {
-        self.textLabel?.text = title
-        self.detailTextLabel?.text = value
+        textLabel?.text = title
+        detailTextLabel?.text = value
     }
 
 }

@@ -7,23 +7,17 @@
 //
 
 import Foundation
-import ObjectMapper
 
-struct City : Mappable {
+struct City: Codable {
     var id : Int?
     var name : String?
     var country : String?
     var coordinate : Coordinate?
     
-    init?(map: Map) {
-        
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case country
+        case coordinate = "coord"
     }
-    
-    mutating func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        country <- map["country"]
-        coordinate <- map["coord"]
-    }
-    
 }

@@ -15,8 +15,8 @@ extension MKMapView {
         let center = CLLocationCoordinate2DMake(lat, lng)
         let distance =  Double(visibility)
         let mapRegion = MKCoordinateRegion.init(center: center, latitudinalMeters: distance, longitudinalMeters: distance)
-        self.setRegion(mapRegion, animated: false)
-        self.setCenter(center, animated: false)
+        setRegion(mapRegion, animated: false)
+        setCenter(center, animated: false)
     }
     
 }

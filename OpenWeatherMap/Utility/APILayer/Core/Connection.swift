@@ -1,5 +1,5 @@
 //
-//  Call.swift
+//  Connection.swift
 //  OpenWeatherMap
 //
 //  Created by admin on 6/16/19.
@@ -10,9 +10,9 @@ import Foundation
 import Alamofire
 
 public typealias Parameters = [String: Any]
-public typealias Header = [String: String]
+public typealias Headers = [String: String]
 
-protocol Call {
+protocol Connection {
     
     associatedtype ReturnType: Decodable
     
@@ -20,7 +20,9 @@ protocol Call {
     var path: String { get }
     var parameters: Parameters? { get }
     var httpBody: Data? { get }
-    var headers: Header? { get }
+    var headers: Headers? { get }
+    
+    var isNeededApiKey: Bool { get }
     
     func parse(data: Data) throws -> ReturnType
     

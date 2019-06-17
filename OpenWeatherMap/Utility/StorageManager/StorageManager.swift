@@ -7,13 +7,11 @@
 //
 
 import Foundation
-import ObjectMapper
 
-protocol FileManagerProtocol {
-    func cities(completion : @escaping ([City]) -> Void)
-}
-
-class FileManager : FileManagerProtocol {
+struct StorageManager {
+    
+    static let shared = StorageManager()
+    
     private let cityFile = "city.list"
     private let fileType = "json"
     
@@ -27,11 +25,15 @@ class FileManager : FileManagerProtocol {
         DispatchQueue.global().async {
             do {
                 let data = try Data(contentsOf: file)
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as!  [[String : Any]]
-                let cities = Mapper<City>().mapArray(JSONArray: json)
-                DispatchQueue.main.async { completion(cities) }
+                let cities = try JSONDecoder().decode([City].self, from: data)
+                DispatchQueue.main.async {
+                    completion(cities)
+                }
             } catch {
-                DispatchQueue.main.async { completion([City]()) }
+                let cities = [City]()
+                DispatchQueue.main.async {
+                    completion(cities)
+                }
             }
         }
     }

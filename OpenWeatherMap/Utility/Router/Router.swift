@@ -16,14 +16,14 @@ class Router {
     private let rootStartViewControllerId = "WeatherNavigationController"
     
     private init() {
-        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        window = UIWindow.init(frame: UIScreen.main.bounds)
         self.rootStartViewController()
     }
     
     func rootStartViewController() {
         let storyboard = UIStoryboard.mainStoryboard()
         let startViewController = storyboard.instantiateViewController(withIdentifier: rootStartViewControllerId)
-        self.window!.rootViewController = startViewController
-        self.window!.makeKeyAndVisible()
+        window!.rootViewController = startViewController
+        window!.makeKeyAndVisible()
     }
 }

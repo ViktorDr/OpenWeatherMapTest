@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CityListCell" rowHeight="87" id="WJw-jq-eTW" customClass="CityListCell" customModule="OpenWeatherMap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WJw-jq-eTW" id="d1O-Pz-QBq">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="City name :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3c-Xl-6is">
+                        <rect key="frame" x="10" y="10" width="86" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label dfg,.mh lkdfgmh lkmdfglhmdfgh dfgh df" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmw-5W-UOg">
+                        <rect key="frame" x="116" y="10" width="249" height="41"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H99-ip-qAn">
+                        <rect key="frame" x="10" y="61" width="70.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label /mfdgl;kmsd ;glks;dl fkgs;ldk fg;lsdfk g" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-tV-Ese">
+                        <rect key="frame" x="116" y="61" width="249" height="15.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Wmw-5W-UOg" firstAttribute="leading" secondItem="T3c-Xl-6is" secondAttribute="trailing" constant="20" id="B0v-lj-666"/>
+                    <constraint firstAttribute="bottom" secondItem="jn3-tV-Ese" secondAttribute="bottom" constant="10" id="Crw-uN-dZ9"/>
+                    <constraint firstItem="Wmw-5W-UOg" firstAttribute="top" secondItem="T3c-Xl-6is" secondAttribute="top" id="FVy-9B-hec"/>
+                    <constraint firstAttribute="trailing" secondItem="Wmw-5W-UOg" secondAttribute="trailing" constant="10" id="KYx-ia-oa1"/>
+                    <constraint firstItem="T3c-Xl-6is" firstAttribute="leading" secondItem="d1O-Pz-QBq" secondAttribute="leading" constant="10" id="SOB-H6-CeC"/>
+                    <constraint firstItem="H99-ip-qAn" firstAttribute="leading" secondItem="T3c-Xl-6is" secondAttribute="leading" id="Ysn-sp-9aM"/>
+                    <constraint firstAttribute="trailing" secondItem="jn3-tV-Ese" secondAttribute="trailing" constant="10" id="oFW-Yb-Gkm"/>
+                    <constraint firstItem="jn3-tV-Ese" firstAttribute="top" secondItem="Wmw-5W-UOg" secondAttribute="bottom" constant="10" id="qSK-dP-v6q"/>
+                    <constraint firstItem="jn3-tV-Ese" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H99-ip-qAn" secondAttribute="trailing" constant="10" id="rDa-o0-9MB"/>
+                    <constraint firstItem="jn3-tV-Ese" firstAttribute="leading" secondItem="Wmw-5W-UOg" secondAttribute="leading" id="skx-Dd-obs"/>
+                    <constraint firstItem="jn3-tV-Ese" firstAttribute="top" secondItem="H99-ip-qAn" secondAttribute="top" id="v0l-Ar-vA8"/>
+                    <constraint firstItem="T3c-Xl-6is" firstAttribute="top" secondItem="d1O-Pz-QBq" secondAttribute="top" constant="10" id="wG8-7E-e9h"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="city" destination="Wmw-5W-UOg" id="hjm-JM-wma"/>
+                <outlet property="cityTitle" destination="T3c-Xl-6is" id="zuh-lQ-AVc"/>
+                <outlet property="country" destination="jn3-tV-Ese" id="Dfp-Ae-5sc"/>
+                <outlet property="countryTitle" destination="H99-ip-qAn" id="c7f-Jz-uzF"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

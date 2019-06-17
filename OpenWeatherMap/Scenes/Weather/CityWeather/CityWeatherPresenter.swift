@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 enum CityWeatherSection : Int {
-    case weather = 0, mainInformation = 1
+    case weather = 0
+    case mainInformation = 1
 }
 
 protocol CityWeatherViewPresenter : class {
     init(withView view: CityWeatherViewProtocol)
-    func downloadWeatherInformation(cityId : Int?)
+    func downloadWeatherInformation(cityId : Int)
     func numberOfSections() -> Int
     func numberOfRowsInSection(section : Int) -> Int
     func rowHeight(section : Int, row : Int) -> CGFloat?
@@ -27,39 +28,30 @@ protocol CityWeatherViewPresenter : class {
 
 class CityWeatherPresenter : CityWeatherViewPresenter {
     
-    let noCityError = "There is no city like this"
     let unknownInfo = "?"
-    let weatherMainInfoTitles = ["Temperature","Pressure","Humidity","Minimal t","Maximum t"]
+    let weatherMainInfoTitles = ["Temperature", "Pressure", "Humidity", "Minimal t", "Maximum t"]
     
-    weak var view : CityWeatherViewProtocol?
-    var cityWeather : CityWeather?
-    var weatherMainInfoValues : [String]
+    weak var view: CityWeatherViewProtocol?
+    var cityWeather: CityWeather?
+    var weatherMainInfoValues: [String]
     
     required init(withView view: CityWeatherViewProtocol)  {
         self.view = view
-        weatherMainInfoValues  = Array(repeating: unknownInfo, count: weatherMainInfoTitles.count)
+        weatherMainInfoValues = Array(repeating: unknownInfo, count: weatherMainInfoTitles.count)
     }
     
-    func downloadWeatherInformation(cityId : Int?) {
-        guard cityId != nil else {
-            self.view?.showError(text: noCityError)
-            return
-        }
-        self.view?.showProgressHUD()
-        APIWeather.shared.cityWeather(cityId: (cityId ?? 0)) { [weak self] (success, result) in
-            guard let realSelf = self else {
-                return
-            }
-            if success && !(result is Bool) {
-                realSelf.cityWeather = result as? CityWeather
-                realSelf.prepareMainInfoValues()
-                realSelf.view?.updateNavigationBar(cityName: realSelf.cityWeather?.name ?? "", date: realSelf.cityWeather?.date)
-                realSelf.view?.updateView()
-            } else if let error = result as? String {
-                    realSelf.view?.showError(text: error)
-            }
-            realSelf.view?.hideProgressHUD()
-        }
+    func downloadWeatherInformation(cityId : Int) {
+        view?.showProgressHUD()
+        APIClient.shared.start(connection: CityWeatherConnection(cityId: cityId), successHandler: { [weak self] result in
+            self?.cityWeather = result
+            self?.prepareMainInfoValues()
+            self?.view?.updateNavigationBar(cityName: self?.cityWeather?.name ?? "", date: self?.cityWeather?.date)
+            self?.view?.updateView()
+            self?.view?.hideProgressHUD()
+        }, failureHandler: { [weak self] error in
+            self?.view?.showError(text: error.localizedDescription)
+            self?.view?.hideProgressHUD()
+        })
     }
     
     func numberOfSections() -> Int {
@@ -68,11 +60,11 @@ class CityWeatherPresenter : CityWeatherViewPresenter {
     
     func prepareMainInfoValues() {
         weatherMainInfoValues.removeAll()
-        self.weatherMainInfoValues.append(self.value(of: self.cityWeather?.mainInfo?.temperature))
-        self.weatherMainInfoValues.append(self.value(of: self.cityWeather?.mainInfo?.pressure))
-        self.weatherMainInfoValues.append(self.value(of: self.cityWeather?.mainInfo?.humidity))
-        self.weatherMainInfoValues.append(self.value(of: self.cityWeather?.mainInfo?.minimalTemperature))
-        self.weatherMainInfoValues.append(self.value(of: self.cityWeather?.mainInfo?.maximumTemperature))
+        weatherMainInfoValues.append(value(of: cityWeather?.mainInfo?.temperature))
+        weatherMainInfoValues.append(value(of: cityWeather?.mainInfo?.pressure))
+        weatherMainInfoValues.append(value(of: cityWeather?.mainInfo?.humidity))
+        weatherMainInfoValues.append(value(of: cityWeather?.mainInfo?.minimalTemperature))
+        weatherMainInfoValues.append(value(of: cityWeather?.mainInfo?.maximumTemperature))
     }
     
     func value<T> (of value: T?) -> String {
@@ -121,7 +113,7 @@ class CityWeatherPresenter : CityWeatherViewPresenter {
         let weather = cityWeather?.weather?.first
         let main = weather?.main
         let descr = weather?.description
-        let iconAddress = APIWeather.shared.imageIcon(weather?.icon ?? "")
+        let iconAddress = APIClient.shared.imageIconPath(by: weather?.icon ?? "")
         return (main : main, description : descr, imageAddress : iconAddress)
     }
     

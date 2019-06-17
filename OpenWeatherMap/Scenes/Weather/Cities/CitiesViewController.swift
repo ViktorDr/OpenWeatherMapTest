@@ -16,7 +16,7 @@ class CitiesViewController: BaseViewController {
     let controllerTitle = "City List"
     
     var cities = [City]()
-    var selectedCity : City?
+    var selectedCity: City?
     
     
     override func viewDidLoad() {
@@ -26,28 +26,26 @@ class CitiesViewController: BaseViewController {
     }
     
     func configureViews() {
-        self.navigationItem.title = controllerTitle
+        navigationItem.title = controllerTitle
         citiesTableView.dataSource = self
         citiesTableView.delegate = self
+        citiesTableView.register(CityListCell.self)
     }
     
     func loadCities() {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        APIWeather.shared.cities { [weak self] (result) in
-            guard let realSelf = self else {
-                return
+        MBProgressHUD.showAdded(to: view, animated: true)
+        StorageManager.shared.cities { [weak self] result in
+            self?.cities = result
+            if let view = self?.view {
+                MBProgressHUD.hide(for: view, animated: true)
             }
-            if let commonCities = result as? [City] {
-                realSelf.cities = commonCities
-            }
-            MBProgressHUD.hide(for: realSelf.view, animated: true)
-            realSelf.citiesTableView.reloadData()
+            self?.citiesTableView.reloadData()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == cityWeatherSegue {
-            let weatherViewController = segue.destination as! CityWeatherViewController
+        if segue.identifier == cityWeatherSegue,
+            let weatherViewController = segue.destination as? CityWeatherViewController {
             weatherViewController.city = selectedCity
         }
     }
@@ -66,20 +64,20 @@ extension CitiesViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : CityTableViewCell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.cellIdentifier()) as! CityTableViewCell
-        let city = cities[indexPath.row]
-        cell.city.text = city.name ?? ""
-        cell.country.text = city.country ?? ""
+        let cell = tableView.dequeueReusableCell(withIdentifier: CityListCell.reuseKey, for: indexPath)
+        if let cell = cell as? CityListCell, let city = cities[safe: indexPath.row] {
+            cell.city.text = city.name ?? ""
+            cell.country.text = city.country ?? ""
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let city = cities[indexPath.row]
-        if city.id != nil  {
+        let city = cities[safe: indexPath.row]
+        if city != nil {
             selectedCity = city
-            self.performSegue(withIdentifier: cityWeatherSegue, sender: self)
+            performSegue(withIdentifier: cityWeatherSegue, sender: self)
         }
-        
     }
 }
 

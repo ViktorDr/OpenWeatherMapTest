@@ -1,15 +1,15 @@
-target 'OpenWeatherMap' do
+platform :ios, '11.0'
 
 use_frameworks!
 
-platform :ios, '9.0'
+def app_pods
+	pod 'Alamofire'
+	pod 'Kingfisher'
+	pod 'MBProgressHUD'
+	pod 'R.swift'
+	pod 'SwiftLint'
+end
 
-pod 'Alamofire'
-
-pod 'ObjectMapper'
-
-pod 'SDWebImage'
-
-pod 'MBProgressHUD'
-
+target 'OpenWeatherMap' do
+  app_pods
 end

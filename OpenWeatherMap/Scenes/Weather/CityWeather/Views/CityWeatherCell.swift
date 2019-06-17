@@ -1,5 +1,5 @@
 //
-//  WeatherTableViewCell.swift
+//  CityWeatherCell.swift
 //  OpenWeatherMap
 //
 //  Created by Viktor Drykin on 13.03.2018.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import SDWebImage
-class WeatherTableViewCell: BaseTableViewCell {
+import Kingfisher
+
+class CityWeatherCell: BaseTableViewCell {
 
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var mainInfo: UILabel!
@@ -16,19 +17,16 @@ class WeatherTableViewCell: BaseTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func setInfo(main : String?, description : String?, imageAddress : String) {
-        self.mainInfo.text = main
-        self.weatherDescription.text = description
-        self.weatherIcon.sd_setImage(with: URL(string: imageAddress), placeholderImage: nil, completed: nil)
+        mainInfo.text = main
+        weatherDescription.text = description
+        weatherIcon.kf.setImage(with: URL(string: imageAddress))
     }
 
 }

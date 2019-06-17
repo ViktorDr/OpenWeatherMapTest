@@ -32,16 +32,17 @@ class CityWeatherViewController: BaseViewController {
         configureViews()
         updateNavigationBar(cityName : city?.name, date : nil)
         presenter = CityWeatherPresenter(withView: self)
-        presenter.downloadWeatherInformation(cityId: city?.id)
+        presenter.downloadWeatherInformation(cityId: city?.id ?? 0)
     }
 
     func configureViews() {
         cityWeatherTableView.dataSource = self
+        cityWeatherTableView.register(MainInfoCell.self)
+        cityWeatherTableView.register(CityWeatherCell.self)
     }
     
     func updateNavigationBar(cityName name : String?, date : Date?) {
-        self.navigationItem.title = (name ?? "") + " (\(date?.text ?? ""))"
-
+        navigationItem.title = (name ?? "") + " (\(date?.text ?? ""))"
     }
 }
 
@@ -54,15 +55,15 @@ extension CityWeatherViewController : CityWeatherViewProtocol {
     }
     
     func showProgressHUD() {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        MBProgressHUD.showAdded(to: view, animated: true)
     }
     
     func hideProgressHUD() {
-        MBProgressHUD.hide(for: self.view, animated: true)
+        MBProgressHUD.hide(for: view, animated: true)
     }
     
     func showError(text: String) {
-        self.showAlertView(text, nil)
+        showAlertView(text, nil)
     }
     
 }
@@ -81,21 +82,24 @@ extension CityWeatherViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var reuseKey = ""
         switch indexPath.section {
         case CityWeatherSection.weather.rawValue:
-            let cell : WeatherTableViewCell = tableView.dequeueReusableCell(withIdentifier: WeatherTableViewCell.cellIdentifier()) as! WeatherTableViewCell
+            reuseKey = CityWeatherCell.reuseKey
+        case CityWeatherSection.mainInformation.rawValue:
+            reuseKey = MainInfoCell.reuseKey
+        default:
+            break
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseKey, for: indexPath)
+        if let cell = cell as? CityWeatherCell {
             let info = presenter.weatherMainInformation()
             cell.setInfo(main: info.main, description: info.description, imageAddress: info.imageAddress)
-            return cell;
-        case CityWeatherSection.mainInformation.rawValue:
-            let cell : MainInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: MainInfoTableViewCell.cellIdentifier()) as! MainInfoTableViewCell
+        }
+        if let cell = cell as? MainInfoCell {
             let info = presenter.mainInfo(by: indexPath.row)
             cell.setInfo(title: info.title, value: info.value)
-            return cell;
-        default:
-            return UITableViewCell()
         }
+        return cell
     }
 }
-
-
